@@ -8,6 +8,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginComponent } from './components/login/login.component';
 
 import { UserService } from './services/user.service';
+import { EmployeeService } from './services/employee.service';
 
 @NgModule({
   declarations: [
@@ -18,11 +19,12 @@ import { UserService } from './services/user.service';
   imports: [
     BrowserModule,
     FormsModule,
+    HttpClientModule,
     UserService,
-    HttpClientModule
+    EmployeeService
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [LoginComponent]
+  entryComponents: [LoginComponent, DashboardComponent]
 })
 export class AppModule { }

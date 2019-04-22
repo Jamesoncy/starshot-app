@@ -2,14 +2,7 @@ import { Injectable, NgModule } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment as env } from '../../environments/environment';
 import { Observable } from 'rxjs';
-
-interface Employees {
-  user_id: string,
-  name_of_employee: string,
-  clock_in_time: string,
-  clock_out_time: string,
-  status: boolean
-}
+import Employees from '../models/Employee';
 
 @Injectable()
 @NgModule()
@@ -17,18 +10,21 @@ export class EmployeeService {
   token: string
   options: Object
 
-  constructor(private http: HttpClient) { 
+  constructor(private _http: HttpClient) { 
+    
+  }
+
+  getOptions() {
     this.token = localStorage.getItem('token')
     this.options = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-        'Authorization': `Basic ${this.token}`
-      })
+      headers: new HttpHeaders()
+        .set('Authorization',  `Bearer ${this.token}`)
     }
   }
 
-  getEmployees(): Observable<Employees[]> {
-    return this.http.get<Employees[]>(env.url('employees'), this.options)
+  getEmployees(): Observable<any> {
+    this.getOptions()
+    return this._http.get<any>(env.url('employee/list'), this.options)
   }
 
 }

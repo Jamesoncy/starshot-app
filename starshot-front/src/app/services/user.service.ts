@@ -19,8 +19,4 @@ export class UserService {
   login(username: string, password: string) : Observable<Token>{
     return this.http.post<Token>(env.url('login'), { username, password })
   }
-
-  storeToken(token) {
-    localStorage.setItem('token', JSON.stringify(token))
-  }
 }

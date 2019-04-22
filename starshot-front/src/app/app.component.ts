@@ -1,6 +1,9 @@
 import { Component, OnInit, ComponentFactoryResolver, Injector } from '@angular/core';
 import { LoginComponent } from './components/login/login.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+
 import * as swal from 'sweetalert';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +13,8 @@ import * as swal from 'sweetalert';
 export class AppComponent implements OnInit {
   title = 'starshot-app';
   message = '';
+
+  private eventsSubject: Subject <void> = new Subject()
 
   constructor(private _resolve: ComponentFactoryResolver, private _injector: Injector) {
   }
@@ -34,12 +39,22 @@ export class AppComponent implements OnInit {
               loginForm()
             } else {
               loginComponent.destroy()
-              
+
+              /*const dashboardFactory = this._resolve.resolveComponentFactory(DashboardComponent),
+                dashboardComponent = dashboardFactory.create(this._injector)
+
+              dashboardComponent.instance.getEmployees()*/
+              this.eventsSubject.next()
             }
           }
         )
       });
 
       loginForm()
+  }
+
+
+  storeToken(token) {
+    localStorage.setItem('token', JSON.stringify(token))
   }
 }
