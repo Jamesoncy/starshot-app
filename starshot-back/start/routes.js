@@ -17,3 +17,5 @@
 const Route = use('Route')
 
 Route.post('login', 'UserController.login').validator('Login')
+
+Route.get('employee/list/:page?', 'EmployeeController.list').middleware('auth')

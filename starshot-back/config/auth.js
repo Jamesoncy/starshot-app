@@ -16,7 +16,7 @@ module.exports = {
   | Available Serializers - lucid, database
   |
   */
-  authenticator: 'jwt',
+  authenticator: 'api',
 
   /*
   |--------------------------------------------------------------------------
@@ -85,10 +85,12 @@ module.exports = {
   |
   */
   api: {
-    serializer: 'lucid',
-    model: 'App/Models/User',
+    serializer: 'mongoose',
     scheme: 'api',
-    uid: 'email',
-    password: 'password'
+    model: 'App/Models/User',
+    token: 'App/Models/Token',
+    uid: 'username', // The user identifier. Ej: email, username
+    password: 'password', // Password field if using user-password validation
+    expiry: '30d', // Not yet implemented
   }
 }

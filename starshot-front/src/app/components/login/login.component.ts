@@ -25,8 +25,9 @@ export class LoginComponent extends DetectChange {
   onValidate(): any {
     return new Observable(observer => {
       this._service.login(this.username, this.password).subscribe(
-        () => {
-          swal(`Success`, `User has been Sucecsfully Login..!`, `success`)
+        ({ message, data}) => {
+          swal(`Success`, message, `success`)
+          localStorage.setItem('token', data.token)
           observer.next(true)
         },
         (err) => this.errorHandler(err, () => observer.next(false))

@@ -1,12 +1,16 @@
 const UserModel = use('App/Models/User');
-const InitialUser = async () => {
-    const count = await UserModel.getCount()
+const Hash = use('Hash')
+const InitialUser = async () => {   
+    const count = await UserModel.countDocuments()
+
     if (count === 0) {
-        const user = new UserModel()
-        
-        user.username = 'test-dev'
-        user.password = 'starshot-dev'
-        await user.save()
+        const username = 'test-dev'
+        const password = await Hash.make('starshot-dev')
+
+        await UserModel.create({
+            username,
+            password
+        })
     }
 }
 

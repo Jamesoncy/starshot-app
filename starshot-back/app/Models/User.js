@@ -1,22 +1,15 @@
 'use strict'
-const Model = require('./BaseModel')
-const uuid = require('uuid')
-const Hash = use('Hash')
+const Model = use('MongooseModel')
 
 class User extends Model {
-  static boot () {
-    super.boot()
-    
-    this.addHook('beforeCreate', async (model) => {
-      model.id = uuid()
-    })
-    
-    this.addHook('beforeSave', async (userInstance) => {
-      if (userInstance.dirty.password) {
-        userInstance.password = await Hash.make(userInstance.password)
-      }
-    })
+  
+  static get schema() {
+    return {
+      username: { type: String },
+      password: { type: String }
+    }
   }
 }
 
-module.exports = User
+module.exports = User.buildModel('User')
+

@@ -4,9 +4,9 @@ import { environment as env } from '../../environments/environment';
 import { Observable } from 'rxjs';
 
 interface Token {
-  body: {
-    message: string,
-    data: Object
+  message: string,
+  data: {
+    token: string
   }
 }
 
@@ -18,5 +18,9 @@ export class UserService {
 
   login(username: string, password: string) : Observable<Token>{
     return this.http.post<Token>(env.url('login'), { username, password })
+  }
+
+  storeToken(token) {
+    localStorage.setItem('token', JSON.stringify(token))
   }
 }

@@ -34,6 +34,7 @@ export class AppComponent implements OnInit {
               loginForm()
             } else {
               loginComponent.destroy()
+              
             }
           }
         )

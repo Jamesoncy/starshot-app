@@ -24,6 +24,8 @@ class ExceptionHandler extends BaseExceptionHandler {
     let message,
         name = error.name
 
+    console.log(error)
+
     if (name === "ValidationException") {
       message = error.messages
     } else {
