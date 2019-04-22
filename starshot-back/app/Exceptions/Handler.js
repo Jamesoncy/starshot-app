@@ -21,7 +21,19 @@ class ExceptionHandler extends BaseExceptionHandler {
    * @return {void}
    */
   async handle (error, { response }) {
-    response.status(error.status).send(error.message)
+    let message,
+        name = error.name
+
+    if (name === "ValidationException") {
+      message = error.messages
+    } else {
+      message = error.message
+    }
+
+    response.status(error.status).json({
+      message,
+      name
+    })
   }
 }
 
