@@ -19,3 +19,6 @@ const Route = use('Route')
 Route.post('login', 'UserController.login').validator('Login')
 
 Route.get('employee/list/:page?', 'EmployeeController.list').middleware('auth')
+Route.post('employee', 'EmployeeController.create').validator('Employee').middleware(['auth', 'emp'])
+Route.patch('employee/:id', 'EmployeeController.update').middleware(['auth', 'emp'])
+Route.delete('employee/:id', 'EmployeeController.delete').middleware(['auth', 'empDel'])
