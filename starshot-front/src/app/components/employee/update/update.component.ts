@@ -62,12 +62,6 @@ export class UpdateComponent extends DetectChange implements OnInit {
       clock_in_time, 
       clock_out_time, 
       this.active, 
-    ).subscribe(
-      ({ message, data }) => { 
-        swal(`Success`, message, `success `) 
-        
-      },
-      this.errorHandler
     )
   }
 }
