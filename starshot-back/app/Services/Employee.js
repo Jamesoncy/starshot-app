@@ -8,7 +8,7 @@ class Employee extends Service {
         try {
             const start = Number(page || 1),
                 limit = 5,
-                data = await Model.paginate({}, { page: start, limit }),
+                data = await Model.paginate({}, { page: start, limit, sort: { user_id: -1 } }),
                 limitPage = start * limit,
                 startPage = limitPage - limit + 1
 
@@ -33,7 +33,8 @@ class Employee extends Service {
 
             return this.successResponse(
                 `Employee ${name_of_employee} has been created Successfully...!`,
-                record
+                record,
+                201
             )
         } catch (err) {
             return this.errorResponse(err)
@@ -56,11 +57,11 @@ class Employee extends Service {
 
     async delete(user_id) {
         try {
-            const record = await Model.remove({ user_id });
+            await Model.remove({ user_id });
             
             return this.successResponse(
                 `UserID ${user_id} has been removed Successfully...!`,
-                record
+                { user_id }
             )
         } catch (err) {
             return this.errorResponse(err)

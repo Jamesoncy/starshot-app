@@ -1,11 +1,9 @@
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef, OnInit, EventEmitter, Output, ComponentFactoryResolver, Injector } from '@angular/core';
 import { DetectChange } from '../../detect-change.component';
-import * as swal from 'sweetalert';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { findLast } from 'lodash'
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
-import { DashboardComponent } from '../../dashboard/dashboard.component';
 
 @Component({
   selector: 'app-update',
@@ -61,7 +59,8 @@ export class UpdateComponent extends DetectChange implements OnInit {
       this.name_of_employee,
       clock_in_time, 
       clock_out_time, 
-      this.active, 
+      this.active,
+      this.errorHandler
     )
   }
 }

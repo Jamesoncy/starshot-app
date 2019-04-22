@@ -71,7 +71,8 @@
         <div class="col-md-12">
           <div class="card">
             <div class="card-header">
-              <h4 class="card-title"> Employee Table</h4>
+              <h4 class="card-title d-inline"> Employee Table</h4>
+              <button (click) = "createInfo()" class = "btn btn-primary d-inline pull-right"><i class="now-ui-icons ui-1_simple-add"></i></button>
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -105,16 +106,16 @@
                           {{ employee.name_of_employee }}
                         </td>
                         <td>
-                          {{ employee.clock_in_time }}
+                          {{ fixDate(employee.clock_in_time) }}
                         </td>
                         <td>
-                          {{ employee.clock_out_time }}
+                          {{ fixDate(employee.clock_out_time) }}
                         </td>
                         <td class="text-right">
                           {{ employee.active }}
                         </td>
                         <td class="text-right">
-                          <button (click)= "onUpdate(employee.user_id)" class = "btn btn-warning" style = "margin-right: 1em"><i class="now-ui-icons ui-1_simple-add"></i></button> <button class = "btn btn-danger" ><i class="now-ui-icons ui-1_simple-delete"></i></button>
+                          <button (click)= "onUpdate(employee.user_id)" class = "btn btn-warning" style = "margin-right: 1em"><i class="now-ui-icons design_scissors"></i></button> <button (click)= "onDelete(employee.user_id)" class = "btn btn-danger" ><i class="now-ui-icons ui-1_simple-delete"></i></button>
                         </td>
                     </tr>
                   </tbody>

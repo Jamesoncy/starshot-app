@@ -1,20 +1,17 @@
 'use strict'
+const Service = require('./Service')
 
-class User {
+class User extends Service {
 
     async validate(username, password, auth) {
         try {
             const result = await auth.attempt(username, password)
-            return {
-                message: 'User credentials successfully logged in...!',
-                data: result
-            }
+            return this.successResponse(
+                'User credentials successfully logged in...!',
+                result
+            )
         } catch(err) {
-            return {
-                message: err.message.replace(`${err.code}: `, '').trim(),
-                data: [],
-                status: 401
-            }
+            return this.errorResponse(err)
         }
     }
 }

@@ -1,3 +1,16 @@
-<p>
-  delete works!
-</p>
+<div class = "card">
+  <div class="row">
+    <div class="col-md-12">
+        <p>
+            Are You Sure to Delete this User ? {{ emp_name }}
+        </p>
+    </div>
+  </div>
+  <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <button (click) = "swalClose()" class = "btn btn-danger">Cancel</button><button (click) = "deleteInfo()" class = "btn btn-success">OK</button> 
+        </div>
+      </div>
+  </div>
+</div>

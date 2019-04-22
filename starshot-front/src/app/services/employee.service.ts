@@ -11,9 +11,13 @@ export class EmployeeService {
   token: string
   options: Object
   public  empUpdate$
+  public  empCreate$
+  public  empDelete$
 
   constructor(private _http: HttpClient) {
     this.empUpdate$ = new Subject();
+    this.empCreate$ = new Subject();
+    this.empDelete$ = new Subject();
   }
 
   getOptions() {
@@ -29,8 +33,16 @@ export class EmployeeService {
     return this._http.get<any>(env.url('employee/list'), this.options)
   }
 
-  subscribe(callback): Subscription {
+  updateSubscribe(callback): Subscription {
     return this.empUpdate$.subscribe(callback);
+  }
+
+  createSubscribe(callback): Subscription {
+    return this.empCreate$.subscribe(callback);
+  }
+
+  deleteSubscribe(callback): Subscription {
+    return this.empDelete$.subscribe(callback);
   }
 
   updateInfo(
@@ -38,7 +50,8 @@ export class EmployeeService {
     name_of_employee,
     clock_in_time, 
     clock_out_time, 
-    active
+    active,
+    errHandler
   )  {
     this.getOptions()
     this._http.patch<any>(env.url(`employee/${user_id}`), {
@@ -50,6 +63,40 @@ export class EmployeeService {
       ({ message, data }) => { 
         swal(`Success`, message, `success`) 
         this.empUpdate$.next(data)
+      },
+      errHandler
+    )
+  }
+
+  addInfo(
+    user_id, 
+    name_of_employee,
+    clock_in_time, 
+    clock_out_time, 
+    active,
+    errHandler) {
+    this.getOptions()
+    this._http.post<any>(env.url(`employee`), {
+      user_id,
+      name_of_employee,
+      clock_in_time,
+      clock_out_time,
+      active
+    }, this.options).subscribe(
+      ({ message, data }) => { 
+        swal(`Success`, message, `success`) 
+        this.empCreate$.next(data)
+      },
+      errHandler
+    )
+  }
+
+  deleteInfo(user_id) {
+    this.getOptions()
+    this._http.delete<any>(env.url(`employee/${user_id}`), this.options).subscribe(
+      ({ message, data }) => {
+        swal(`Success`, message, `success`) 
+        this.empDelete$.next(data)
       }
     )
   }

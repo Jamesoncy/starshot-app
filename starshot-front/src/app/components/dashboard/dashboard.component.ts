@@ -2,10 +2,13 @@ import { Component, Input, ChangeDetectorRef, OnInit, ComponentFactoryResolver, 
 import { EmployeeService } from 'src/app/services/employee.service';
 import { DetectChange } from '../detect-change.component';
 import { Observable } from 'rxjs';
+import { CreateComponent } from '../employee/create/create.component';
+import { UpdateComponent } from '../employee/update/update.component';
+import { DeleteComponent } from '../employee/delete/delete.component';
+import { Subscription } from 'rxjs';
+import { findIndex, sortBy } from 'lodash';
+import * as moment from 'moment';
 import * as swal from 'sweetalert';
-import { UpdateComponent } from '../employee/update/update.component'
-import { Subscription } from 'rxjs'
-import { findIndex, sortBy } from 'lodash'
 
 @Component({
   selector: 'app-dashboard',
@@ -17,18 +20,25 @@ export class DashboardComponent extends DetectChange implements OnInit {
   private eventsSubscription: any
   private empUpdate: any
   private subscription: Subscription;
-
-  public minDate: Date = new Date ("05/07/2017");
-  public maxDate: Date = new Date ("05/27/2017");
-  public value: Date = new Date ("05/16/2017");
-
-  public updateComponent;
-
-  employees = []
+  private employees = []
 
   constructor(private _ref: ChangeDetectorRef, private _empService: EmployeeService, private _resolve: ComponentFactoryResolver, private _injector: Injector) { 
     super(_ref)
-    this.subscription = _empService.subscribe((data) => {
+    this.updateEmp()
+    this.createEmp()
+    this.deleteEmp()
+  }
+
+  createEmp() {
+    this.subscription = this._empService.createSubscribe((data) => {
+      this.employees.pop()
+      this.employees.push(data)
+      this.employees = sortBy(this.employees, ['user_id']).reverse()
+    })
+  }
+
+  updateEmp() {
+    this.subscription = this._empService.updateSubscribe((data) => {
       const { 
         user_id
       } = data,
@@ -36,20 +46,42 @@ export class DashboardComponent extends DetectChange implements OnInit {
      
       this.employees.splice(index, 1)
       this.employees.unshift(data)
-      this.employees = sortBy(this.employees, ['user_id'])
-      this._ref.detectChanges()
+      this.employees = sortBy(this.employees, ['user_id']).reverse()
     })
+  }
+
+  deleteEmp() {
+    this.subscription = this._empService.deleteSubscribe(({ user_id }) => {
+      const index = findIndex(this.employees, (obj) => obj.user_id === user_id)
+      this.employees.splice(index, 1)
+      this.getEmployees()
+    })
+  }
+
+  fixDate(date) {
+    return moment(date).format('YYYY-MM-DD hh:mm A')
   }
 
   ngOnInit() {
     this.eventsSubscription = this.events.subscribe(() => this.getEmployees())
-    this._empService.empUpdate$.subscribe()
   }
 
   getEmployees(): void {
     this._empService.getEmployees().subscribe(({ data: { docs } }) => { 
       this.employees = docs
     }, this.errorHandler)
+  }
+
+  createInfo() {
+    const updateFactory = this._resolve.resolveComponentFactory(CreateComponent),
+      createComponent = updateFactory.create(this._injector)
+
+      swal({
+        content: createComponent.location.nativeElement,
+        icon: 'info',
+        title: 'Create Employee Info',
+        buttons: {}
+      })
   }
 
   onUpdate(user_id) {
@@ -69,11 +101,19 @@ export class DashboardComponent extends DetectChange implements OnInit {
       })
   }
 
-  displayCounter(event) {
-    alert()
-  }
+  onDelete(user_id, emp_name) {
+    const deleteFactory = this._resolve.resolveComponentFactory(DeleteComponent),
+      deleteComponent = deleteFactory.create(this._injector)
 
-  onDelete(user_id) {
-    alert(user_id)
+      deleteComponent.instance.user_id = user_id
+      deleteComponent.instance.emp_name = emp_name
+      deleteComponent.changeDetectorRef.detectChanges()
+
+      swal({
+        content: deleteComponent.location.nativeElement,
+        icon: 'info',
+        title: 'Delete Employee Info',
+        buttons: {}
+      })
   }
 }

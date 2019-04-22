@@ -7,13 +7,13 @@ class EmployeeDelete {
 
     const findUser = await Model.findOne({ user_id: id })
 
-    if (findUser) {
+    if (!findUser) {
       return response.status(409).json({
         message: `User with the User ID ${ id } is not Existing...!`,
         data: []
       })
     }
-    
+
     await next()
   }
 }

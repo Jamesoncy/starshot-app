@@ -10,8 +10,8 @@ import { LoginComponent } from './components/login/login.component';
 import { UserService } from './services/user.service';
 import { EmployeeService } from './services/employee.service';
 import { UpdateComponent } from './components/employee/update/update.component';
-import { DeleteComponent } from './components/employee/delete/delete.component';
 import { CreateComponent } from './components/employee/create/create.component';
+import { DeleteComponent } from './components/employee/delete/delete.component';
 
 @NgModule({
   declarations: [
@@ -19,8 +19,8 @@ import { CreateComponent } from './components/employee/create/create.component';
     DashboardComponent,
     LoginComponent,
     UpdateComponent,
-    DeleteComponent,
-    CreateComponent
+    CreateComponent,
+    DeleteComponent
   ],
   imports: [
     BrowserModule,
@@ -32,6 +32,6 @@ import { CreateComponent } from './components/employee/create/create.component';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [LoginComponent, DashboardComponent, UpdateComponent]
+  entryComponents: [LoginComponent, DashboardComponent, CreateComponent, UpdateComponent, DeleteComponent]
 })
 export class AppModule { }
