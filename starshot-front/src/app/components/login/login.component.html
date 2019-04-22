@@ -1,3 +1,18 @@
-<p>
-  login works!
-</p>
+<div class = "card">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label class = "pull-left">Username</label>
+        <input type="text" [(ngModel)]="username" (input)="onSearchChange()" class="form-control" placeholder="Enter Username">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label class = "pull-left">Password</label>
+        <input type="password" [(ngModel)]="password" (input)="onSearchChange()" class="form-control" placeholder="Enter Password">
+      </div>
+    </div>
+  </div>
+</div>
