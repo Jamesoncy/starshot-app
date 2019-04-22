@@ -1,1 +1,1 @@
-<app-dashboard  [events]="eventsSubject.asObservable()" (childEvent) = "message=$event" [appTitle] = "title" ></app-dashboard>
+<app-dashboard (valueChange)='displayCounter($event)' [events]="eventsSubject.asObservable()" (childEvent) = "message=$event" [appTitle] = "title" ></app-dashboard>

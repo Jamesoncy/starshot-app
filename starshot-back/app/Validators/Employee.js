@@ -11,7 +11,7 @@ class Employee {
         name_of_employee: `required`,
         clock_in_time: 'required|date',
         clock_out_time:'required|date',
-        status: 'required|boolean'
+        active: 'required|boolean'
       }
     }
     return {
@@ -19,7 +19,7 @@ class Employee {
       name_of_employee: 'required',
       clock_in_time: 'required|date',
       clock_out_time: 'required|date',
-      status: 'required|boolean'
+      active: 'required|boolean'
     }
   }
 }

@@ -21,14 +21,14 @@ class Employee extends Service {
         }
     }
 
-    async create(user_id, name_of_employee, clock_in_time, clock_out_time, status) {
+    async create(user_id, name_of_employee, clock_in_time, clock_out_time, active) {
         try {
             const record = await Model.create({
                 user_id,
                 name_of_employee,
                 clock_in_time,
                 clock_out_time,
-                status
+                active
             })
 
             return this.successResponse(
@@ -40,13 +40,14 @@ class Employee extends Service {
         }
     }
 
-    async update(user_id, name_of_employee, clock_in_time, clock_out_time, status) {
+    async update(user_id, name_of_employee, clock_in_time, clock_out_time, active) {
         try {
-            const record = await Model.updateOne({ user_id }, { name_of_employee, clock_in_time, clock_out_time, status });
-            
+            await Model.updateOne({ user_id }, { name_of_employee, clock_in_time, clock_out_time, active })
+            const user = await Model.findOne({ user_id })
+
             return this.successResponse(
                 `UserID ${user_id} has been updated Successfully...!`,
-                record
+                user
             )
         } catch (err) {
             return this.errorResponse(err)

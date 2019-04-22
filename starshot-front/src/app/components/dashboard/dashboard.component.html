@@ -1,4 +1,4 @@
-<div class="wrapper ">
+<div class="wrapper">
   <div id="main-panel">
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-transparent  bg-primary  navbar-absolute">
@@ -92,24 +92,30 @@
                     <th class="text-right">
                       Status
                     </th>
+                    <th class="text-right">
+                        Action
+                      </th>
                   </thead>
                   <tbody>
                     <tr *ngFor="let employee of employees">
-                        <th>
+                        <td>
                           {{ employee.user_id }}
-                        </th>
-                        <th>
+                        </td>
+                        <td>
                           {{ employee.name_of_employee }}
-                        </th>
-                        <th>
+                        </td>
+                        <td>
                           {{ employee.clock_in_time }}
-                        </th>
-                        <th>
+                        </td>
+                        <td>
                           {{ employee.clock_out_time }}
-                        </th>
-                        <th class="text-right">
+                        </td>
+                        <td class="text-right">
                           {{ employee.active }}
-                        </th>
+                        </td>
+                        <td class="text-right">
+                          <button (click)= "onUpdate(employee.user_id)" class = "btn btn-warning" style = "margin-right: 1em"><i class="now-ui-icons ui-1_simple-add"></i></button> <button class = "btn btn-danger" ><i class="now-ui-icons ui-1_simple-delete"></i></button>
+                        </td>
                     </tr>
                   </tbody>
                 </table>

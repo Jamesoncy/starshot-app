@@ -4,10 +4,6 @@ import { UserService } from 'src/app/services/user.service';
 import { Observable } from 'rxjs';
 import * as swal from 'sweetalert';
 
-interface Result {
-  result: boolean
-}
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -17,7 +13,6 @@ export class LoginComponent extends DetectChange {
   username: string;
   password: string
 
-  @Output() childEvent = new EventEmitter()
   constructor(private _ref: ChangeDetectorRef, private _service: UserService) {
     super(_ref)
   }

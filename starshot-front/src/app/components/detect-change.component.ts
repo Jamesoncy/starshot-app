@@ -3,8 +3,10 @@ import { HttpErrorResponse } from '@angular/common/http';
 import * as swal from 'sweetalert';
 
 export class DetectChange {
-
+  swal
+  
   constructor(private _reference) {
+    this.swal = swal
   }
 
   onSearchChange() {
@@ -18,5 +20,9 @@ export class DetectChange {
         return fn()
       }
     })
+  }
+
+  swalClose() {
+    this.swal.close()
   }
 }

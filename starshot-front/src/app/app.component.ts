@@ -1,6 +1,5 @@
 import { Component, OnInit, ComponentFactoryResolver, Injector } from '@angular/core';
 import { LoginComponent } from './components/login/login.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 import * as swal from 'sweetalert';
 import { Subject } from 'rxjs';
@@ -39,18 +38,19 @@ export class AppComponent implements OnInit {
               loginForm()
             } else {
               loginComponent.destroy()
-
-              /*const dashboardFactory = this._resolve.resolveComponentFactory(DashboardComponent),
-                dashboardComponent = dashboardFactory.create(this._injector)
-
-              dashboardComponent.instance.getEmployees()*/
               this.eventsSubject.next()
             }
           }
         )
       });
 
+    if (localStorage.getItem('token')) {
+      swal(`Info`, 'Already Logged in..!', 'info').then(() => {
+        this.eventsSubject.next()
+      })
+    } else {
       loginForm()
+    }
   }
 
 

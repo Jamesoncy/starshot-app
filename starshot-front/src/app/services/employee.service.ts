@@ -11,7 +11,6 @@ export class EmployeeService {
   options: Object
 
   constructor(private _http: HttpClient) { 
-    
   }
 
   getOptions() {
@@ -27,4 +26,19 @@ export class EmployeeService {
     return this._http.get<any>(env.url('employee/list'), this.options)
   }
 
+  updateInfo(
+    user_id, 
+    name_of_employee,
+    clock_in_time, 
+    clock_out_time, 
+    active
+  ) : Observable<any> {
+    this.getOptions()
+    return this._http.patch<any>(env.url(`employee/${user_id}`), {
+      name_of_employee,
+      clock_in_time,
+      clock_out_time,
+      active
+    }, this.options)
+  }
 }

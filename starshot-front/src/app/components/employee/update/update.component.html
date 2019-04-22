@@ -1,0 +1,68 @@
+<div class = "card">
+    <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label class = "pull-left">User ID</label>
+            <input [(ngModel)]="user_id" disabled (input)="onSearchChange()" class="form-control" placeholder="Enter User ID">
+          </div>
+        </div>
+      </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label class = "pull-left">Name Of Employee</label>
+          <input type="text" [(ngModel)]="name_of_employee" (input)="onSearchChange()" class="form-control" placeholder="Enter Name Of Employee">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label class = "pull-left">Clock In Time</label>
+            <label class = "pull-left">Date / Time</label>
+          </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <input type="date" [(ngModel)]="clock_in_date" (input)="onSearchChange()" class="d-inline form-control col-lg-6" placeholder="Enter Date Time In">
+            <input type="time" [(ngModel)]="clock_in_time" (input)="onSearchChange()" class="d-inline form-control col-lg-6" placeholder="Enter Date Time In">
+          </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label class = "pull-left">Clock In Time</label>
+            <label class = "pull-left">Date / Time</label>
+          </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <input type="date" [(ngModel)]="clock_out_date" (input)="onSearchChange()" class="d-inline form-control col-lg-6" placeholder="Enter Date Time In">
+            <input type="time" [(ngModel)]="clock_out_time" (input)="onSearchChange()" class="d-inline form-control col-lg-6" placeholder="Enter Date Time In">
+          </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label class = "pull-left">Status</label>
+            <select [(ngModel)]="active" class = "form-control" (input)="onSearchChange()">
+              <option value = true>Active</option>
+              <option value = false>In-Active</option>
+            </select>
+          </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <button (click) = "swalClose()" class = "btn btn-danger">Cancel</button><button (click) = "saveInfo()" class = "btn btn-success">OK</button> 
+          </div>
+        </div>
+    </div>
+  </div>
