@@ -53,6 +53,12 @@ export class DashboardComponent extends DetectChange implements OnInit {
   }
 
   onSearch() {
+    this._empService.searcEmp(this.search, this.status).subscribe(
+      ({ data }) => {
+        console.log(data)
+      },
+      this.errorHandler
+    )
   }
 
   deleteEmp() {

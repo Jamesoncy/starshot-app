@@ -91,6 +91,15 @@ export class EmployeeService {
     )
   }
 
+  searcEmp(search, status): Observable<any>  {
+    this.getOptions()
+    const options = Object.assign({}, this.options, { params: {
+      search, status
+    }})
+    
+    return this._http.get<any>(env.url(`employee/list`), options)
+  }
+
   deleteInfo(user_id) {
     this.getOptions()
     this._http.delete<any>(env.url(`employee/${user_id}`), this.options).subscribe(

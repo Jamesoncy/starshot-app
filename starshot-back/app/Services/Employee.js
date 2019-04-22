@@ -4,11 +4,21 @@ const Service = require('./Service')
 
 class Employee extends Service {
 
-    async paginate(page) {
+    async paginate(page, search = null, status = null) {
         try {
             const start = Number(page || 1),
                 limit = 5,
-                data = await Model.paginate({}, { page: start, limit, sort: { user_id: -1 } }),
+                query = {}
+
+            if (search) {
+                query.name_of_employee =new RegExp(search, 'i')
+            }
+
+            if (status) {
+                query.active = status
+            }
+                
+            const data = await Model.paginate(query, { page: start, limit, sort: { user_id: -1 } }),
                 limitPage = start * limit,
                 startPage = limitPage - limit + 1
 
@@ -57,7 +67,7 @@ class Employee extends Service {
 
     async delete(user_id) {
         try {
-            // await Model.remove({ user_id });
+            await Model.remove({ user_id });
             
             return this.successResponse(
                 `UserID ${user_id} has been removed Successfully...!`,

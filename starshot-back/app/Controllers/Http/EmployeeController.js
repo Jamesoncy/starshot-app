@@ -4,8 +4,10 @@ const BaseController = use('App/Controllers/BaseController')
 
 class EmployeeController extends BaseController {
 
-    async list({ response, params: { page } }) {
-        const result = await Service.paginate(page)
+    async list({ request, response, params: { page } }) {
+        const { search = null, status = null } = request.get(),
+          result = await Service.paginate(page, search, status)
+
         return this.response(response, result)
     }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { DetectChange } from '../../detect-change.component';
 import { EmployeeService } from 'src/app/services/employee.service';
 import * as moment from 'moment';
@@ -8,7 +8,7 @@ import * as moment from 'moment';
   templateUrl: './create.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CreateComponent extends DetectChange implements OnInit {
+export class CreateComponent extends DetectChange {
 
   name_of_employee: string
   user_id: Number;
@@ -27,9 +27,6 @@ export class CreateComponent extends DetectChange implements OnInit {
     this.clock_in_time = ''
     this.clock_out_time = ''
     this.active = true
-   }
-
-  ngOnInit() {
   }
 
   saveInfo() {
