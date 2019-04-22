@@ -116,4 +116,9 @@ export class DashboardComponent extends DetectChange implements OnInit {
         buttons: {}
       })
   }
+
+  logOut() {
+    localStorage.removeItem('token')
+    location.reload()
+  }
 }

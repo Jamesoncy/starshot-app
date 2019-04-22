@@ -57,7 +57,7 @@ class Employee extends Service {
 
     async delete(user_id) {
         try {
-            await Model.remove({ user_id });
+            // await Model.remove({ user_id });
             
             return this.successResponse(
                 `UserID ${user_id} has been removed Successfully...!`,
