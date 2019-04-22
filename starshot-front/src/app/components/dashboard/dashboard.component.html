@@ -19,16 +19,21 @@
           <span class="navbar-toggler-bar navbar-kebab"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navigation">
-          <form>
-            <div class="input-group no-border">
-              <input type="text" value="" class="form-control" placeholder="Search...">
-              <div class="input-group-append">
+          <div class="input-group no-border col-lg-3" style = "padding-right: 0px !important">
+            <select class = "form-control input-group-text" [(ngModel)] = 'status' (input)="onSearchChange()" >
+              <option style = "color:black" value = "">---Select Status---</option>
+              <option style = "color:black" value = "true" >ACTIVE</option>
+              <option style = "color:black" value = "false" >IN-ACTIVE</option>
+            </select>
+          </div>
+          <div class="input-group no-border col-lg-3" style = "padding-left: 0px !important">
+              <input type="text" [(ngModel)] = 'search' class="form-control" placeholder="Search...">
+              <div class="input-group-append" (click)="onSearch()">
                 <div class="input-group-text">
                   <i class="now-ui-icons ui-1_zoom-bold"></i>
                 </div>
               </div>
-            </div>
-          </form>
+          </div>
           <ul class="navbar-nav">
             <li class="nav-item">
               <a class="nav-link" (click) = "logOut()">

@@ -17,10 +17,12 @@ import * as swal from 'sweetalert';
 export class DashboardComponent extends DetectChange implements OnInit {
   @Input() appTitle: string;
   @Input() events: Observable<void>;
-  private eventsSubscription: any
-  private empUpdate: any
+  private eventsSubscription: any;
+  private empUpdate: any;
   private subscription: Subscription;
-  private employees = []
+  private employees = [];
+  private status: String = '';
+  private search: String = '';
 
   constructor(private _ref: ChangeDetectorRef, private _empService: EmployeeService, private _resolve: ComponentFactoryResolver, private _injector: Injector) { 
     super(_ref)
@@ -48,6 +50,9 @@ export class DashboardComponent extends DetectChange implements OnInit {
       this.employees.unshift(data)
       this.employees = sortBy(this.employees, ['user_id']).reverse()
     })
+  }
+
+  onSearch() {
   }
 
   deleteEmp() {
