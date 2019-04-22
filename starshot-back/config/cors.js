@@ -1,5 +1,6 @@
 'use strict'
 const Env = use('Env')
+console.log(Env.get('CORS_URL'))
 
 module.exports = {
   /*

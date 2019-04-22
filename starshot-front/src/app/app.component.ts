@@ -9,6 +9,7 @@ import * as swal from 'sweetalert';
 })
 export class AppComponent implements OnInit {
   title = 'starshot-app';
+  message = '';
 
   constructor(private _resolve: ComponentFactoryResolver, private _injector: Injector) {
   }
@@ -18,17 +19,26 @@ export class AppComponent implements OnInit {
   }
 
   loginForm() {
-    const loginFactory = this._resolve.resolveComponentFactory(LoginComponent),
+    let loginFactory = this._resolve.resolveComponentFactory(LoginComponent),
       loginComponent = loginFactory.create(this._injector);
 
-      swal({
+      const loginForm = () => swal({
         content: loginComponent.location.nativeElement,
         closeOnClickOutside: false,
         icon: 'info',
         title: 'Login'
       }).then(() => {
-        loginComponent.destroy();
-        loginComponent.instance.onValidate();
+        loginComponent.instance.onValidate().subscribe(
+          (data: Boolean) => {
+            if (!data) {
+              loginForm()
+            } else {
+              loginComponent.destroy()
+            }
+          }
+        )
       });
+
+      loginForm()
   }
 }

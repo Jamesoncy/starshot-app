@@ -11,7 +11,12 @@ export class DetectChange {
     this._reference.detectChanges()
   }
 
-  errorHandler(error: HttpErrorResponse) {
-    swal(`hey`)
+  errorHandler(error: HttpErrorResponse, fn = null) {
+    const { error: { message } } = error
+    swal(`Oops..!`, message, `error`).then(() => {
+      if (fn !== null) {
+        return fn()
+      }
+    })
   }
 }

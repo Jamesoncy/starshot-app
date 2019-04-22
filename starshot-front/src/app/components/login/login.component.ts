@@ -1,5 +1,12 @@
-import { Component, ChangeDetectionStrategy, ChangeDetectorRef  } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef, Output, EventEmitter  } from '@angular/core';
 import { DetectChange } from '../detect-change.component';
+import { UserService } from 'src/app/services/user.service';
+import { Observable } from 'rxjs';
+import * as swal from 'sweetalert';
+
+interface Result {
+  result: boolean
+}
 
 @Component({
   selector: 'app-login',
@@ -10,12 +17,20 @@ export class LoginComponent extends DetectChange {
   username: string;
   password: string
 
-  constructor(private _ref: ChangeDetectorRef) {
+  @Output() childEvent = new EventEmitter()
+  constructor(private _ref: ChangeDetectorRef, private _service: UserService) {
     super(_ref)
   }
 
-  onValidate() {
-    
+  onValidate(): any {
+    return new Observable(observer => {
+      this._service.login(this.username, this.password).subscribe(
+        () => {
+          swal(`Success`, `User has been Sucecsfully Login..!`, `success`)
+          observer.next(true)
+        },
+        (err) => this.errorHandler(err, () => observer.next(false))
+      )
+    })
   }
-
 }
