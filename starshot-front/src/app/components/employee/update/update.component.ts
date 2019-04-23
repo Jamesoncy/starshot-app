@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy, ChangeDetectorRef, OnInit, EventEmi
 import { DetectChange } from '../../detect-change.component';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { findLast } from 'lodash'
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import * as moment from 'moment';
 
 @Component({
@@ -12,19 +12,27 @@ import * as moment from 'moment';
 })
 export class UpdateComponent extends DetectChange implements OnInit {
 
-  name_of_employee: string
+  name_of_employee: string;
   user_id: Number;
-  clock_out_date: string
-  clock_in_date: string
-  clock_in_time: string
-  clock_out_time: string
-  active: Boolean = true
-
+  clock_out_date: string;
+  clock_in_date: string;
+  clock_in_time: string;
+  clock_out_time: string;
+  active: Boolean = true;
+  errMessage: String = '';
+  private subscription: Subscription;
   private updateInfo = new EventEmitter();
 
   constructor(private _ref: ChangeDetectorRef, private _service: EmployeeService, private _resolve: ComponentFactoryResolver, private _injector: Injector) { 
     super(_ref)
+    this.updateEmp()
+  }
 
+  updateEmp() {
+    this.subscription = this._service.updateErr((data) => {
+      this.errMessage = data
+      this._ref.detectChanges()
+    })
   }
 
   applyInfo(employees): any {

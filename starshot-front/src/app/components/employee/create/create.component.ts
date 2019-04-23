@@ -2,6 +2,7 @@ import { Component, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/
 import { DetectChange } from '../../detect-change.component';
 import { EmployeeService } from 'src/app/services/employee.service';
 import * as moment from 'moment';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-create',
@@ -10,16 +11,26 @@ import * as moment from 'moment';
 })
 export class CreateComponent extends DetectChange {
 
-  name_of_employee: string
+  name_of_employee: string;
   user_id: Number;
-  clock_out_date: string
-  clock_in_date: string
-  clock_in_time: string
-  clock_out_time: string
-  active: Boolean = true
-  
+  clock_out_date: string;
+  clock_in_date: string;
+  clock_in_time: string;
+  clock_out_time: string;
+  active: Boolean = true;
+  errMessage: String = '';
+  private subscription: Subscription;
+
   constructor(private _ref: ChangeDetectorRef, private _service: EmployeeService) {
     super(_ref)
+    this.createEmp()
+  }
+
+  createEmp() {
+    this.subscription = this._service.createErr((data) => {
+      this.errMessage = data
+      this._ref.detectChanges()
+    })
   }
 
   saveInfo() {

@@ -15,10 +15,15 @@ export class EmployeeService {
   public  empCreate$
   public  empDelete$
 
+  public  errUpdate$
+  public  errCreate$
+
   constructor(private _http: HttpClient) {
     this.empUpdate$ = new Subject();
     this.empCreate$ = new Subject();
     this.empDelete$ = new Subject();
+    this.errUpdate$ = new Subject();
+    this.errCreate$ = new Subject();
   }
 
   getOptions() {
@@ -34,6 +39,14 @@ export class EmployeeService {
     return this._http.get<any>(env.url('employee/list'), this.options)
   }
 
+  updateErr(callback): Subscription {
+    return this.errUpdate$.subscribe(callback);
+  }
+
+  createErr(callback): Subscription {
+    return this.errCreate$.subscribe(callback);
+  }
+
   updateSubscribe(callback): Subscription {
     return this.empUpdate$.subscribe(callback);
   }
@@ -46,11 +59,11 @@ export class EmployeeService {
     return this.empDelete$.subscribe(callback);
   }
 
-  validateEmp(cloneData) {
+  validateEmp(cloneData, bool = true) {
     const data = Object.assign({},cloneData)
 
-    data.clock_in_time = new Date(data.clock_in_time)
-    data.clock_out_time = new Date(data.clock_out_time)
+    data.clock_in_time = (data.clock_in_time !== null) ? new Date(data.clock_in_time) : null
+    data.clock_out_time = (data.clock_out_time !== null) ? new Date(data.clock_out_time) : null
 
     const
       rules = {
@@ -71,7 +84,13 @@ export class EmployeeService {
       const validate = validation.errors.all();
       const key = Object.keys(validate)[0];
       const errorMessage = validate[key][0];
-      setTimeout(() => swal("Oops!", errorMessage, "error"), 100);
+
+      if (bool) {
+        this.errUpdate$.next(errorMessage)
+      } else {
+        this.errCreate$.next(errorMessage)
+      }
+
       return true;
     }
     return false
@@ -127,7 +146,7 @@ export class EmployeeService {
       clock_out_time, 
       active
     };
-    const bool = this.validateEmp(data)
+    const bool = this.validateEmp(data, false)
   
     if (bool) {
       return

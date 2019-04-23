@@ -93,6 +93,7 @@
                   </tbody>
                 </table>
                 <ngb-pagination
+                  [className] = "pull-right"
                   [pageSize]="pageSize + 1"
                   [collectionSize]="collectionSize"
                   (pageChange) = "pageNumber($event)"></ngb-pagination>

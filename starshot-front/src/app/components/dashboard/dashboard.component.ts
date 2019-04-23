@@ -1,11 +1,10 @@
 import { Component, Input, ChangeDetectorRef, OnInit, ComponentFactoryResolver, Injector } from '@angular/core';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { DetectChange } from '../detect-change.component';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { CreateComponent } from '../employee/create/create.component';
 import { UpdateComponent } from '../employee/update/update.component';
 import { DeleteComponent } from '../employee/delete/delete.component';
-import { Subscription } from 'rxjs';
 import { findIndex, sortBy } from 'lodash';
 import * as moment from 'moment';
 import * as swal from 'sweetalert';
