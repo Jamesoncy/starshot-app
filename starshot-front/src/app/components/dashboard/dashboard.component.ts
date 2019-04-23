@@ -23,8 +23,8 @@ export class DashboardComponent extends DetectChange implements OnInit {
   private status: String = '';
   private search: String = '';
   private showPage: Boolean = true;
-  pageSize: Number = 0;
-  collectionSize: Number = 0;
+  pageSize: number = 0;
+  collectionSize: number = 0;
 
   constructor(private _ref: ChangeDetectorRef, private _empService: EmployeeService, private _resolve: ComponentFactoryResolver, private _injector: Injector) { 
     super(_ref)
@@ -38,6 +38,7 @@ export class DashboardComponent extends DetectChange implements OnInit {
       this.employees.pop()
       this.employees.push(data)
       this.employees = sortBy(this.employees, ['user_id']).reverse()
+      this.collectionSize = this.collectionSize + 1
     })
   }
 
@@ -57,9 +58,9 @@ export class DashboardComponent extends DetectChange implements OnInit {
   onSearch(pageSize = 1) {
     this.showPage = false
     this._empService.searcEmp(this.search, this.status, pageSize).subscribe(
-      ({ data: { docs, total, pages } }) => {
+      ({ data: { docs, total, limit } }) => {
         this.employees = docs
-        this.pageSize = pages
+        this.pageSize = limit
         this.collectionSize = total
         this.showPage = true
       },
@@ -89,9 +90,9 @@ export class DashboardComponent extends DetectChange implements OnInit {
 
   getEmployees(): void {
     this.showPage = false
-    this._empService.getEmployees().subscribe(({ data: { docs, total, pages } }) => { 
+    this._empService.getEmployees().subscribe(({ data: { docs, total, limit } }) => { 
       this.employees = docs
-      this.pageSize = pages
+      this.pageSize = limit
       this.collectionSize = total
       this.showPage = true
     }, this.errorHandler)
