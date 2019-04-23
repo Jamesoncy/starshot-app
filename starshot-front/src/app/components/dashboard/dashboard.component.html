@@ -42,7 +42,8 @@
                 </select>
               </div>
             </div>
-            <div class="card-body">
+            <div class="card-body text-center">
+              <label [hidden] = "showPage">Loading...!</label>
               <button (click) = "createInfo()" class = "btn btn-primary pull-right"><i class="now-ui-icons ui-1_simple-add"></i></button>
               <div class="table-responsive">
                 <table class="table">
@@ -66,7 +67,7 @@
                         Action
                       </th>
                   </thead>
-                  <tbody>
+                  <tbody [hidden] = "!showPage">
                     <tr *ngFor="let employee of employees">
                         <td>
                           {{ employee.user_id }}
@@ -91,6 +92,10 @@
                     </tr>
                   </tbody>
                 </table>
+                <ngb-pagination
+                  [pageSize]="pageSize + 1"
+                  [collectionSize]="collectionSize"
+                  (pageChange) = "pageNumber($event)"></ngb-pagination>
               </div>
             </div>
           </div>

@@ -91,13 +91,13 @@ export class EmployeeService {
     )
   }
 
-  searcEmp(search, status): Observable<any>  {
+  searcEmp(search, status, pageSize = 1): Observable<any>  {
     this.getOptions()
     const options = Object.assign({}, this.options, { params: {
       search, status
     }})
-    
-    return this._http.get<any>(env.url(`employee/list`), options)
+
+    return this._http.get<any>(env.url(`employee/list/${pageSize}`), options)
   }
 
   deleteInfo(user_id) {

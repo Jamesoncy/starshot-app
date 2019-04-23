@@ -23,6 +23,9 @@ export class DashboardComponent extends DetectChange implements OnInit {
   private employees = [];
   private status: String = '';
   private search: String = '';
+  private showPage: Boolean = true;
+  pageSize: Number = 0;
+  collectionSize: Number = 0;
 
   constructor(private _ref: ChangeDetectorRef, private _empService: EmployeeService, private _resolve: ComponentFactoryResolver, private _injector: Injector) { 
     super(_ref)
@@ -52,13 +55,21 @@ export class DashboardComponent extends DetectChange implements OnInit {
     })
   }
 
-  onSearch() {
-    this._empService.searcEmp(this.search, this.status).subscribe(
-      ({ data }) => {
-        console.log(data)
+  onSearch(pageSize = 1) {
+    this.showPage = false
+    this._empService.searcEmp(this.search, this.status, pageSize).subscribe(
+      ({ data: { docs, total, pages } }) => {
+        this.employees = docs
+        this.pageSize = pages
+        this.collectionSize = total
+        this.showPage = true
       },
       this.errorHandler
     )
+  }
+
+  pageNumber($event) {
+    this.onSearch($event)
   }
 
   deleteEmp() {
@@ -78,8 +89,12 @@ export class DashboardComponent extends DetectChange implements OnInit {
   }
 
   getEmployees(): void {
-    this._empService.getEmployees().subscribe(({ data: { docs } }) => { 
+    this.showPage = false
+    this._empService.getEmployees().subscribe(({ data: { docs, total, pages } }) => { 
       this.employees = docs
+      this.pageSize = pages
+      this.collectionSize = total
+      this.showPage = true
     }, this.errorHandler)
   }
 
