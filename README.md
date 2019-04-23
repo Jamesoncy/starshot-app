@@ -26,7 +26,8 @@ To run the starshot frontend
 
 To stop the starshot-front, simply type npm run delete
 
-The UI App by .env default will run at http://localhost:4200
+The FRONTEND App by .env default will run at http://localhost:4200
+The BACKEND App by .env default will run at http://localhost:3333
 
 
 NG-CLI
