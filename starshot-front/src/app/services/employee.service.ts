@@ -51,13 +51,13 @@ export class EmployeeService {
 
     data.clock_in_time = new Date(data.clock_in_time)
     data.clock_out_time = new Date(data.clock_out_time)
-    
+
     const
       rules = {
       user_id: "required|integer", 
       name_of_employee: "required",
       clock_in_time: "required|date", 
-      clock_out_time: `required|date|after_or_equal:clock_in_time`, 
+      clock_out_time: `required|date|after:clock_in_time`, 
       active: "required|boolean"
     },
     customMessage = {
