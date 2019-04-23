@@ -5,8 +5,8 @@
   "description": "Adonisjs boilerplate for API server with pre-configured JWT",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
-    "test": "node ace test"
+    "start": "pm2 start process.config.js",
+    "delete": "pm2 delete process.config.js"
   },
   "keywords": [
     "adonisjs",
@@ -28,6 +28,7 @@
     "adonis-mongoose-model": "^3.0.1",
     "faker": "^4.1.0",
     "lodash": "^4.17.11",
+    "moment": "^2.24.0",
     "mongoose-paginate": "^5.0.3",
     "mysql": "^2.17.1",
     "uuid": "^3.3.2"
