@@ -16,13 +16,13 @@ import * as swal from 'sweetalert';
 export class DashboardComponent extends DetectChange implements OnInit {
   @Input() appTitle: string;
   @Input() events: Observable<void>;
-  private eventsSubscription: any;
-  private empUpdate: any;
-  private subscription: Subscription;
-  private employees = [];
-  private status: String = '';
-  private search: String = '';
-  private showPage: Boolean = true;
+  eventsSubscription: any;
+  empUpdate: any;
+  subscription: Subscription;
+  employees = [];
+  status: String = '';
+  search: String = '';
+  showPage: Boolean = true;
   pageSize: number = 0;
   collectionSize: number = 0;
 

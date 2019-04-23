@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
   title = 'starshot-app';
   message = '';
 
-  private eventsSubject: Subject <void> = new Subject()
+  eventsSubject: Subject <void> = new Subject()
 
   constructor(private _resolve: ComponentFactoryResolver, private _injector: Injector) {
   }
