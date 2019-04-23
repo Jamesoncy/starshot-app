@@ -30,6 +30,8 @@ The FRONTEND App by .env default will run at http://localhost:4200
 The BACKEND App by .env default will run at http://localhost:3333
 
 
+for the listing of employees, i have based their ordering via UserId Desc
+
 NG-CLI
 
 Angular CLI: 7.0.7
