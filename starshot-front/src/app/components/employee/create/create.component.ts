@@ -20,13 +20,6 @@ export class CreateComponent extends DetectChange {
   
   constructor(private _ref: ChangeDetectorRef, private _service: EmployeeService) {
     super(_ref)
-    this.name_of_employee = ''
-    this.user_id = null
-    this.clock_out_date = ''
-    this.clock_in_date = ''
-    this.clock_in_time = ''
-    this.clock_out_time = ''
-    this.active = true
   }
 
   saveInfo() {
