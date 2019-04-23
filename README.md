@@ -28,7 +28,7 @@ To stop the starshot-front, simply type npm run delete
 
 The FRONTEND App by .env default will run at http://localhost:4200
 The BACKEND App by .env default will run at http://localhost:3333
-
+Demo Link http://ec2-3-82-223-237.compute-1.amazonaws.com:4200/
 
 for the listing of employees, i have based their ordering via UserId Desc
 
