@@ -28,3 +28,27 @@ To stop the starshot-front, simply type npm run delete
 
 The UI App by .env default will run at http://localhost:4200
 
+
+NG-CLI
+
+Angular CLI: 7.0.7
+Node: 8.11.3
+OS: darwin x64
+Angular: 
+... 
+
+Package                      Version
+------------------------------------------------------
+@angular-devkit/architect    0.10.7
+@angular-devkit/core         7.0.7
+@angular-devkit/schematics   7.0.7
+@schematics/angular          7.0.7
+@schematics/update           0.10.7
+rxjs                         6.3.3
+typescript                   3.1.6
+
+NODE-VERSION
+
+v8.11.3
+
+
