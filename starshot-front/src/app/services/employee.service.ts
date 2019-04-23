@@ -54,6 +54,7 @@ export class EmployeeService {
     errHandler
   )  {
     this.getOptions()
+    this.showLoading()
     this._http.patch<any>(env.url(`employee/${user_id}`), {
       name_of_employee,
       clock_in_time,
@@ -76,6 +77,7 @@ export class EmployeeService {
     active,
     errHandler) {
     this.getOptions()
+    this.showLoading()
     this._http.post<any>(env.url(`employee`), {
       user_id,
       name_of_employee,
@@ -100,7 +102,16 @@ export class EmployeeService {
     return this._http.get<any>(env.url(`employee/list/${pageSize}`), options)
   }
 
+  showLoading() {
+    swal({
+      icon: 'info',
+      text: 'Loading',
+      buttons: {}
+    })
+  }
+
   deleteInfo(user_id) {
+    this.showLoading()
     this.getOptions()
     this._http.delete<any>(env.url(`employee/${user_id}`), this.options).subscribe(
       ({ message, data }) => {
