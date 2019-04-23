@@ -32,6 +32,7 @@
     "rxjs": "~6.3.3",
     "sweetalert": "^2.0.8",
     "tslib": "^1.9.0",
+    "validatorjs": "^3.15.1",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {

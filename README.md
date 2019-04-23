@@ -32,7 +32,7 @@ The UI App by .env default will run at http://localhost:4200
 NG-CLI
 
 Angular CLI: 7.0.7
-Node: 8.11.3
+Node: v8.16.0
 OS: darwin x64
 Angular: 
 ... 
@@ -47,8 +47,5 @@ Package                      Version
 rxjs                         6.3.3
 typescript                   3.1.6
 
-NODE-VERSION
-
-v8.11.3
 
 
