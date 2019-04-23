@@ -43,9 +43,6 @@
               </div>
             </div>
             <div class="card-body">
-              <div class="col-lg-12 text-center">
-                <label [hidden] = "showPage">Loading...!</label>
-              </div>
               <button (click) = "createInfo()" class = "btn btn-primary pull-right"><i class="now-ui-icons ui-1_simple-add"></i></button>
               <div class="table-responsive">
                 <table class="table">
@@ -66,31 +63,36 @@
                       Status
                     </th>
                     <th class="text-right">
-                        Action
-                      </th>
+                      Action
+                    </th>
                   </thead>
-                  <tbody [hidden] = "!showPage">
-                    <tr *ngFor="let employee of employees">
-                        <td>
-                          {{ employee.user_id }}
-                        </td>
-                        <td>
-                          {{ employee.name_of_employee }}
-                        </td>
-                        <td>
-                          {{ fixDate(employee.clock_in_time) }}
-                        </td>
-                        <td>
-                          {{ fixDate(employee.clock_out_time) }}
-                        </td>
-                        <td class="text-center">
-                          <div [className] = "employee.active ? 'alert-success' : 'alert-danger'">
-                            <b>{{ (employee.active) ? 'Active' : 'In Active' }}</b>
-                          </div>
-                        </td>
-                        <td class="text-right">
-                          <button (click)= "onUpdate(employee.user_id)" class = "btn btn-warning" style = "margin-right: 1em"><i class="now-ui-icons design_scissors"></i></button> <button (click)= "onDelete(employee.user_id)" class = "btn btn-danger" ><i class="now-ui-icons ui-1_simple-delete"></i></button>
-                        </td>
+                  <tbody>
+                    <tr [hidden] = "showPage">
+                      <td colspan = 6 class = "text-center" >
+                        Loading...!
+                      </td>
+                    </tr>
+                    <tr *ngFor="let employee of employees" [hidden] = "!showPage">
+                      <td>
+                        {{ employee.user_id }}
+                      </td>
+                      <td>
+                        {{ employee.name_of_employee }}
+                      </td>
+                      <td>
+                        {{ fixDate(employee.clock_in_time) }}
+                      </td>
+                      <td>
+                        {{ fixDate(employee.clock_out_time) }}
+                      </td>
+                      <td class="text-center">
+                        <div [className] = "employee.active ? 'alert-success' : 'alert-danger'">
+                          <b>{{ (employee.active) ? 'Active' : 'In Active' }}</b>
+                        </div>
+                      </td>
+                      <td class="text-right">
+                        <button (click)= "onUpdate(employee.user_id)" class = "btn btn-warning" style = "margin-right: 1em"><i class="now-ui-icons design_scissors"></i></button> <button (click)= "onDelete(employee.user_id)" class = "btn btn-danger" ><i class="now-ui-icons ui-1_simple-delete"></i></button>
+                      </td>
                     </tr>
                   </tbody>
                 </table>
